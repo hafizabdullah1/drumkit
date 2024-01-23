@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drum Kit</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body{
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url(./img/pexels-soumil-kumar-735911.jpg);
+            background-size: 100% 100%;
+        }
+        .main{
+            height: 20vh;
+            width: 80%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        kbd{
+            height: 80px;
+            width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 3px solid grey;
+            border-right: 3px solid grey;
+            cursor: pointer;
+            padding-bottom: 10px;
+        }
+        p{
+            color: white;
+            text-transform: uppercase;
+            font-size: 3rem;
+        }
+        p::selection{
+            color: none;
+            background: none;
+        }
+        span{
+            color: yellow;
+            text-transform: uppercase;
+        }
+        span::selection{
+            color: none;
+            background: none;
+        }
+        .playing{
+            transform: scale(1.1);
+            border-color: #ffc600;
+            box-shadow: 0 0 1rem #ffc600;
+            transition: all 0.3s linear
+        }
+    </style>
+</head>
+<body>
+        <div class="main">
+            <kbd data-key="65">
+                <p>a</p>
+                <span>clap</span>
+            </kbd>
+
+            <kbd data-key="83">
+                <p>s</p>
+                <span>hihat</span>
+            </kbd>
+            <kbd data-key="68">
+                <p>d</p>
+                <span>kick</span>
+            </kbd>
+            <kbd data-key="70">
+                <p>f</p>
+                <span>openhat</span>
+            </kbd>
+            <kbd data-key="71">
+                <p>g</p>
+                <span>boom</span>
+            </kbd>
+            <kbd data-key="72">
+                <p>h</p>
+                <span>ride</span>
+            </kbd>
+            <kbd data-key="74">
+                <p>j</p>
+                <span>snake</span>
+            </kbd>
+            <kbd data-key="75">
+                <p>k</p>
+                <span>tom</span>
+            </kbd>
+            <kbd data-key="76">
+                <p>l</p>
+                <span>tink</span>
+            </kbd>
+        </div>
+
+        <!-- Audio tags -->
+        <audio data-key="65" src="./sounds/clap.wav"></audio>
+        <audio data-key="83" src="./sounds/hihat.wav"></audio>
+        <audio data-key="68" src="./sounds/kick.wav"></audio>
+        <audio data-key="70" src="./sounds/openhat.wav"></audio>
+        <audio data-key="71" src="./sounds/boom.wav"></audio>
+        <audio data-key="72" src="./sounds/ride.wav"></audio>
+        <audio data-key="74" src="./sounds/snare.wav"></audio>
+        <audio data-key="75" src="./sounds/tom.wav"></audio>
+        <audio data-key="76" src="./sounds/tink.wav"></audio>
+    </body>
+    <script>
+        
+            window.addEventListener('keydown', (e)=> {
+            var audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
+            var key = document.querySelector(`kbd[data-key="${e.keyCode}"]`)
+            console.log(key);
+
+            if(audio)
+            {
+                audio.play()
+                audio.currentTime=0
+                key.classList.add('playing')
+                setTimeout(()=> {
+                    key.classList.remove('playing')
+                },250)
+            }
+        })
+
+
+    // var allKeys=document.querySelectorAll('kbd')
+    // allKeys.forEach((e)=> {
+    //     e.addEventListener('transitionend', ()=>{
+    //         if (e.propertyName="transform") {
+    //         e.classList.remove('playing')
+    //     } 
+    //     return
+    //     })
+    // }) 
+</script>
+</html>
